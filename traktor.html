@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Traktor TN</title>
+    <style>
+        :root {
+            --primary-color: #ffcc00;
+            --secondary-color: #333;
+            --background-color: rgba(37, 36, 36, 0.7);
+            --text-color: #ffffff;
+            --highlight-color: #444;
+            --button-hover-bg: #ffd700;
+            --button-hover-color: #333;
+        }
+
+        body {
+            background: url('trak.jpg') no-repeat center center fixed;
+            background-size: cover;
+            font-family: 'Arial', sans-serif;
+            color: var(--text-color);
+            margin: 0;
+            padding: 0;
+            display: flex;
+        }
+
+        .sidenav {
+            height: 100%;
+            width: 250px;
+            position: fixed;
+            left: 0;
+            top: 0;
+            background-color: var(--background-color);
+            padding-top: 60px;
+        }
+
+        .sidenav .back-btn {
+            padding: 15px 8px;
+            font-size: 1.5em;
+            color: var(--primary-color);
+            text-decoration: none;
+            display: block;
+            transition: background-color 0.3s, color 0.3s;
+            background: none;
+            border: none;
+            cursor: pointer;
+            font-weight: bold;
+        }
+
+        .sidenav .back-btn:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--button-hover-color);
+        }
+
+        h1 {
+            color: var(--text-color);
+            text-shadow: 2px 2px 5px rgba(37, 36, 36, 0.7);
+            margin: 20px 0;
+            font-size: 2.5em;
+            text-align: center;
+        }
+
+        .gallery {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 30px;
+            width: 100%;
+            padding-left: 270px;
+            box-sizing: border-box;
+        }
+
+        .tractor {
+            border: 1px solid var(--highlight-color);
+            border-radius: 8px;
+            background-color: rgba(255, 255, 255, 0.9);
+            width: 320px;
+            text-align: center;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tractor img {
+            width: 100%;
+            height: 220px;
+            object-fit: cover;
+            border-bottom: 1px solid var(--highlight-color);
+            border-radius: 8px 8px 0 0;
+        }
+
+        .description {
+            padding: 20px;
+            font-size: 1.1em;
+            color: var(--secondary-color);
+        }
+
+        .swap-btn {
+            background-color: var(--primary-color);
+            border: none;
+            color: var(--text-color);
+            padding: 12px;
+            font-size: 1em;
+            cursor: pointer;
+            border-radius: 50%;
+            transition: background-color 0.3s ease, color 0.3s ease;
+            position: absolute;
+            top: 50%;
+            transform: translateY(-50%);
+        }
+
+        .swap-btn-left {
+            left: 15px;
+        }
+
+        .swap-btn-right {
+            right: 15px;
+        }
+
+        .swap-btn:hover {
+            background-color: var(--button-hover-bg);
+            color: var(--button-hover-color);
+        }
+    </style>
+</head>
+<body>
+    <div class="sidenav">
+        <button class="back-btn" onclick="window.history.back()">← Back</button>
+    </div>
+
+    <div class="gallery">
+        <h1>Our Traktors</h1>
+        <div class="tractor">
+            <button class="swap-btn swap-btn-left" onclick="swapImage('tractor1', -1)">←</button>
+            <img src="a.jpeg" alt="Tractor 1" id="tractor1">
+            <button class="swap-btn swap-btn-right" onclick="swapImage('tractor1', 1)">→</button>
+            <div class="description">
+                <p><strong>Model:</strong> Tractor 1</p>
+                <p>Powerful and efficient for all your agricultural needs.</p>
+            </div>
+        </div>
+        <div class="tractor">
+            <button class="swap-btn swap-btn-left" onclick="swapImage('tractor2', -1)">←</button>
+            <img src="z.jpeg" alt="Tractor 2" id="tractor2">
+            <button class="swap-btn swap-btn-right" onclick="swapImage('tractor2', 1)">→</button>
+            <div class="description">
+                <p><strong>Model:</strong> Tractor 2</p>
+                <p>Durable and reliable with advanced features.</p>
+            </div>
+        </div>
+        <div class="tractor">
+            <button class="swap-btn swap-btn-left" onclick="swapImage('tractor3', -1)">←</button>
+            <img src="e.webp" alt="Tractor 3" id="tractor3">
+            <button class="swap-btn swap-btn-right" onclick="swapImage('tractor3', 1)">→</button>
+            <div class="description">
+                <p><strong>Model:</strong> Tractor 3</p>
+                <p>High performance with cutting-edge technology.</p>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const tractorImages = {
+            'tractor1': ['a.jpeg', 'zz.webp', 'aaa.jpeg'],
+            'tractor2': ['z.jpeg', 'zz.webp', 'zzz.webp'],
+            'tractor3': ['e.webp', 'ee.webp', 'traktor.webp']
+        };
+
+        const currentIndex = {
+            'tractor1': 0,
+            'tractor2': 0,
+            'tractor3': 0
+        };
+
+        function swapImage(tractorId, direction) {
+            const images = tractorImages[tractorId];
+            currentIndex[tractorId] = (currentIndex[tractorId] + direction + images.length) % images.length;
+            document.getElementById(tractorId).src = images[currentIndex[tractorId]];
+        }
+    </script>
+</body>
+</html>
